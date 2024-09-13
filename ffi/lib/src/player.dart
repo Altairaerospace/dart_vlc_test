@@ -48,6 +48,13 @@ class Player {
   /// Position & duration state of the [Player] instance.
   PositionState position = PositionState();
 
+  int getAudioTrackCount() {
+    return PlayerFFI.getAudioTrackCount(id);
+  }
+
+  void setAudioTrack(int index) {
+    PlayerFFI.setAudioTrack(id, index);
+  }
   /// Stream to listen to position & duration state of the [Player] instance.
   late Stream<PositionState> positionStream;
 
@@ -396,11 +403,6 @@ class Player {
       height,
     );
     calloc.free(filePathCStr);
-  }
-
-  /// Sets Current Audio Track for the current [MediaSource]
-  void setAudioTrack(int track) {
-    return PlayerFFI.setAudioTrack(id, track);
   }
 
   /// Gets audio track count from current [MediaSource]
