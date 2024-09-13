@@ -465,7 +465,7 @@ DartDeviceList* DevicesAll(Dart_Handle object) {
                                        device.id().c_str());
   }
 
-wrapper->dart_object.size = static_cast<int32_t>(wrapper->device_infos.size());
+  wrapper->dart_object.size = wrapper->device_infos.size();
   wrapper->dart_object.device_infos = wrapper->device_infos.data();
 
   Dart_NewFinalizableHandle_DL(
@@ -486,7 +486,7 @@ static DartEqualizer* EqualizerToDart(const Equalizer* equalizer, int32_t id,
   wrapper->dart_object.pre_amp = equalizer->pre_amp();
   wrapper->dart_object.bands = wrapper->bands.data();
   wrapper->dart_object.amps = wrapper->amps.data();
-  wrapper->dart_object.size = static_cast<int32_t>(wrapper->amps.size());
+  wrapper->dart_object.size = wrapper->amps.size();
 
   Dart_NewFinalizableHandle_DL(
       dart_handle, wrapper, sizeof(*wrapper),
@@ -497,15 +497,15 @@ static DartEqualizer* EqualizerToDart(const Equalizer* equalizer, int32_t id,
 
 struct DartEqualizer* EqualizerCreateEmpty(Dart_Handle object) {
   auto id = g_equalizers->Count();
-  g_equalizers->Create(static_cast<int32_t>(id), std::make_unique<Equalizer>());
-  return EqualizerToDart(g_equalizers->Get(static_cast<int32_t>(id)), static_cast<int32_t>(id), object);
+  g_equalizers->Create(id, std::make_unique<Equalizer>());
+  return EqualizerToDart(g_equalizers->Get(id), id, object);
 }
 
 struct DartEqualizer* EqualizerCreateMode(Dart_Handle object, int32_t mode) {
   auto id = g_equalizers->Count();
   g_equalizers->Create(
-      static_cast<int32_t>(id), std::make_unique<Equalizer>(static_cast<EqualizerMode>(mode)));
-  return EqualizerToDart(g_equalizers->Get(static_cast<int32_t>(id)), static_cast<int32_t>(id), object);
+      id, std::make_unique<Equalizer>(static_cast<EqualizerMode>(mode)));
+  return EqualizerToDart(g_equalizers->Get(id), id, object);
 }
 
 void EqualizerSetBandAmp(int32_t id, float band, float amp) {

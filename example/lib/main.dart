@@ -31,10 +31,7 @@ class PrimaryScreen extends StatefulWidget {
 }
 
 class PrimaryScreenState extends State<PrimaryScreen> {
-  Player player = Player(
-    id: 0,
-    videoDimensions: const VideoDimensions(640, 360),
-  );
+  Player player = Player(id: 0);
   MediaType mediaType = MediaType.file;
   CurrentState current = CurrentState();
   PositionState position = PositionState();
@@ -169,8 +166,8 @@ class PrimaryScreenState extends State<PrimaryScreen> {
                                     width: 152.0,
                                     child: DropdownButton<MediaType>(
                                       value: mediaType,
-                                      onChanged: (value) =>
-                                          setState(() => mediaType = value!),
+                                      onChanged: (value) => this
+                                          .setState(() => mediaType = value!),
                                       items: [
                                         DropdownMenuItem<MediaType>(
                                           value: MediaType.file,
@@ -244,7 +241,8 @@ class PrimaryScreenState extends State<PrimaryScreen> {
                               ),
                               const Text('Playlist'),
                             ] +
-                            medias
+                            this
+                                .medias
                                 .map(
                                   (media) => ListTile(
                                     title: Text(
@@ -325,11 +323,18 @@ class PrimaryScreenState extends State<PrimaryScreen> {
                           ),
                           Slider(
                             min: 0,
-                            max: position.duration?.inMilliseconds.toDouble() ??
+                            max: this
+                                    .position
+                                    .duration
+                                    ?.inMilliseconds
+                                    .toDouble() ??
                                 1.0,
-                            value:
-                                position.position?.inMilliseconds.toDouble() ??
-                                    0.0,
+                            value: this
+                                    .position
+                                    .position
+                                    ?.inMilliseconds
+                                    .toDouble() ??
+                                0.0,
                             onChanged: (double position) => player.seek(
                               Duration(
                                 milliseconds: position.toInt(),
@@ -486,7 +491,8 @@ class PrimaryScreenState extends State<PrimaryScreen> {
                                 height: 12.0,
                               ),
                             ] +
-                            devices
+                            this
+                                .devices
                                 .map(
                                   (device) => ListTile(
                                     title: Text(
