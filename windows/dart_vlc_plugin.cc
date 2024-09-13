@@ -24,30 +24,6 @@
 #include "include/dart_vlc/video_outlet.h"
 #include "include/dart_vlc/win32_window.h"
 
-extern "C" {
-
-int32_t PlayerGetSubtitleCount(int32_t id) {
-  auto player = g_players->Get(id);
-  return libvlc_video_get_spu_count(player->player());
-}
-
-void PlayerSetSubtitle(int32_t id, int32_t index) {
-  auto player = g_players->Get(id);
-  libvlc_video_set_spu(player->player(), index);
-}
-
-int32_t PlayerGetAudioTrackCount(int32_t id) {
-  auto player = g_players->Get(id);
-  return libvlc_audio_get_track_count(player->player());
-}
-
-void PlayerSetAudioTrack(int32_t id, int32_t index) {
-  auto player = g_players->Get(id);
-  libvlc_audio_set_track(player->player(), index);
-}
-
-}
-
 namespace {
 
 class DartVlcPlugin : public flutter::Plugin {

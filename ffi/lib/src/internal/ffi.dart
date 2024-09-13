@@ -171,14 +171,6 @@ abstract class DevicesFFI {
       .asFunction();
 }
 
-final PlayerGetAudioTrackCountDart getAudioTrackCount = dynamicLibrary
-      .lookup<NativeFunction<PlayerGetAudioTrackCountCXX>>('PlayerGetAudioTrackCount')
-      .asFunction();
-
-final PlayerSetAudioTrackDart setAudioTrack = dynamicLibrary
-      .lookup<NativeFunction<PlayerSetAudioTrackCXX>>('PlayerSetAudioTrack')
-      .asFunction();
-
 abstract class EqualizerFFI {
   static final EqualizerCreateEmptyDart createEmpty = dynamicLibrary
       .lookup<NativeFunction<EqualizerCreateEmptyCXX>>('EqualizerCreateEmpty')
